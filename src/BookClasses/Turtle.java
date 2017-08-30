@@ -457,23 +457,4 @@ public class Turtle extends SimpleTurtle
            this.turnRight();
        }
    }
-/**
-     * 
-     * @param width integer that specifies length of the sides
-     * @param orientation integer that specifies starting heading of the turtle
-     * @param color this sets the color of the shape color.*
-     */
-      public void drawBoldSquare(int width, int orientation, Color color){
-           
-       
-       
-       this.setPenWidth(5);
-       this.setHeading(orientation);
-       for (int i=0; i < 4; i++){
-           this.forward(width);
-           this.turnRight();
-       }
-      }
-   } 
-// this } is the end of class Turtle, put all new methods before this
-
+} // this } is the end of class Turtle, put all new methods before this
