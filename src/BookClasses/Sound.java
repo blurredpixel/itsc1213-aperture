@@ -180,5 +180,38 @@ public class Sound extends SimpleSound
       }
        
   }
+  //new method for clipping low frequencies
+  /**
+   *this method clips low frequencies 
+   * @return this is an integer that tell you how many samples were clipped
+   */
+  public int clipLows()
+  {
+      
+      SoundSample [] sampleArray = this.getSamples() ;
+      SoundSample sample = null;
+      int index = 0;
+      //loop through samples
+      for (int i =0; i < sampleArray.length; i++)
+      {
+          sample=sampleArray[i];
+          
+          if ( sample.getValue() <0)
+          {
+              index++;
+              sample.setValue(0);
+              
+          }
+          
+         }//end of for loop
+         return index;
+      
+      
+      
+      }
+      
+      
+      
+  
   
 } // this } is the end of class Sound, put all new methods before this
