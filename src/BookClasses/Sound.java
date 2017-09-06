@@ -1,5 +1,8 @@
 package BookClasses;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Class that represents a sound. This class is used by the students to extend
  * the capabilities of SimpleSound.
@@ -200,5 +203,25 @@ public class Sound extends SimpleSound {
         }
         
     }
-
+    /**
+     * 
+     * @param size how large of a chunk to replace
+     * @param value what value to replace each chunk with
+     */
+    public void checkerBoardValue(int size, int value)
+    {
+        SoundSample[] sampleArray = this.getSamples();
+        SoundSample sample = null;
+        
+        for(int i =0;i<sampleArray.length;i++)
+        {
+            sample=sampleArray[i];
+            if((i/size)%2==1)
+            {
+                sample.setValue(value);
+                
+            }
+        }
+    }
+    
 } // this } is the end of class Sound, put all new methods before this
