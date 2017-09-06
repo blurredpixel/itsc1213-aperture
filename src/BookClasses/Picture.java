@@ -1201,6 +1201,31 @@ public class Picture extends SimplePicture
             g.drawString(text,center-(int)(strWidth*0.5),y);
             
         }
+        /**
+         * This method should be used to draw the MasterCard logo on the screen
+         */
+        public void drawMCLogo()
+        {
+            //initialize graphics object
+            Graphics g = this.getGraphics();
+            
+            
+            
+            //set color for first circle
+            g.setColor(Color.RED);
+            
+            g.fillOval(100, 10, 100, 100);
+            
+            g.setColor(Color.YELLOW);
+            
+            g.fillOval(150, 10, 100, 100);
+            
+            //set color
+            g.setColor(Color.WHITE);
+            
+            g.setFont(new Font("Arial",Font.BOLD,24));
+            g.drawString("MasterCard", 120,75);
+        }
             
 } // this } is the end of class Picture, put all new methods before this
  
