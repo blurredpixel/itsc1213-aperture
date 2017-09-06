@@ -81,5 +81,104 @@ public class Sound extends SimpleSound
     Sound sound1 = new Sound(FileChooser.pickAFile());
     sound1.explore();
   }
-             
+        
+  public void increaseVolume()
+  {
+      SoundSample[] sampleArray = this.getSamples();
+      SoundSample sample = null;
+      int value = 0;
+      int index =0;
+      
+      //loop all samples in the array
+      while(index< sampleArray.length)
+      {
+          sample=sampleArray[index];
+          value = sample.getValue();
+          sample.setValue(value*2);
+          index++;
+      }
+  }
+  
+  /**
+   * Method to change volume of the sound 
+   * by multiplying the current values in the sound
+   * by the passed factor
+   * @param factor the factor to multiply by 
+   */
+   
+  public void changeVolume(double factor)
+  {
+      SoundSample[] sampleArray = this.getSamples();
+      SoundSample sample = null;
+      int value =0;
+      //loop through all samples
+      for (int i =0; i< sampleArray.length;i++)
+      {
+          sample = sampleArray[i];
+          value=sample.getValue();
+          sample.setValue((int) (value*factor));
+      }
+  }
+  
+  public void normalize()
+  {
+      int largest =0;
+      int maxIndex = 0;
+      SoundSample[] sampleArray = this.getSamples();
+      SoundSample sample = null;
+      int value = 0;
+      
+      //loop coparing abs value of current to current largest
+      for (int i =0; i<sampleArray.length;i++)
+      {
+          sample=sampleArray[i];
+          value=Math.abs(sample.getValue());
+          if (value > largest)
+          {
+              largest = value;
+              maxIndex = i;
+          }
+      }
+      //calc multiplyer
+      double multiplier=32767.0 / largest;
+      
+      //print largest value and multiplier
+      System.out.println("Largeset value was " + largest + " at index " + maxIndex);
+      System.out.println("Multiplier is: "+multiplier);
+      
+      /*
+      *loop through all samples and multiply by multiplier
+      */
+      
+      for (int i=0;i < sampleArray.length; i++)
+      {
+          sample= sampleArray[i];
+          sample.setValue((int) (sample.getValue()*multiplier));
+      }
+            
+  }
+  
+  /**
+   * method to set all sample values to max positive value
+   */
+  
+  public void forceToExtremes()
+  {
+      SoundSample[] sampleArray = this.getSamples();
+      SoundSample sample = null;
+      
+      //loop through sample values
+      for (int i =0;i < sampleArray.length;i++)
+      {
+          sample=sampleArray[i];
+          if(sample.getValue() >=0)
+          {
+              sample.setValue(32767);
+          }
+          else
+              sample.setValue(-32767);
+      }
+       
+  }
+  
 } // this } is the end of class Sound, put all new methods before this
