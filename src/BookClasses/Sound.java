@@ -291,6 +291,87 @@ public class Sound extends SimpleSound {
         }
     }
     
+    public Sound zeroAlternatingSamples()
+    {
+        
+        Sound sound = new Sound(this.getLength());
+        SoundSample[] sampleArray = this.getSamples();
+        SoundSample[] sampleArray2 = sound.getSamples();
+        
+        for (int i = 0; i < sampleArray.length; i++){
+            if (i % 2 == 1){
+                sampleArray2[i].setValue(0);
+            }
+            
+            else
+                sampleArray2[i].setValue(sampleArray[i].getValue());
+        }
+        
+        return sound;
+        
+    }
+    
+    public Sound repeatAlternatingSamples()
+    {
+        
+        Sound sound = new Sound(this.getLength());
+        SoundSample[] sampleArray = this.getSamples();
+        SoundSample[] sampleArray2 = sound.getSamples();
+        
+        for (int i = 0; i < sampleArray.length; i++){
+            if (i % 2 == 0){
+                sampleArray2[i].setValue(sampleArray[i].getValue());
+            }
+            
+            else
+                sampleArray2[i].setValue(sampleArray[i-1].getValue());
+        }
+        
+        return sound;
+        
+    }
+    
+    public Sound skipSamples()
+    {
+        Sound sound = new Sound(this.getLength()/2);
+        SoundSample[] sampleArray = this.getSamples();
+        SoundSample[] sampleArray2 = sound.getSamples();
+        
+        for (int i = 0; i < sampleArray2.length; i++){
+            sampleArray2[i].setValue(sampleArray[2*i].getValue());
+        }
+        return sound;
+    }
+    
+    public Sound repeatAllSamples()
+    {
+        Sound sound = new Sound(this.getLength()*2);
+        SoundSample[] sampleArray = this.getSamples();
+        SoundSample[] sampleArray2 = sound.getSamples();
+        
+        for (int i = 0; i < sampleArray.length; i++){
+            sampleArray2[2*i].setValue(sampleArray[i].getValue());
+            sampleArray2[2*i+1].setValue(sampleArray[i].getValue());
+        }
+        return sound;
+    }
+    
+    public Sound skipSamplesBonus(int size)
+    {
+        Sound sound = new Sound(this.getLength() - this.getLength()/size);
+        SoundSample[] sampleArray = this.getSamples();
+        SoundSample[] sampleArray2 = sound.getSamples();
+        
+        for (int i = 0; i < sampleArray2.length; i++){
+            if (i % size != 0) 
+            {
+                sampleArray2[i].setValue(sampleArray[i].getValue());
+            }
+            sampleArray2[i].setValue(sampleArray[size*i].getValue());
+            
+        }
+        return sound;
+    }
     
     
 } // this } is the end of class Sound, put all new methods before this
