@@ -363,15 +363,15 @@ public class Sound extends SimpleSound {
         SoundSample[] sampleArray2 = sound.getSamples();
         
         for (int i = 0; i < sampleArray2.length; i++){
-            if (i % size != 0) 
-            {
-                sampleArray2[i].setValue(sampleArray[i].getValue());
-            }
-            sampleArray2[i].setValue(sampleArray[size*i].getValue());
+            
+            
+                sampleArray2[i].setValue(sampleArray[i+(i/(size-1))-((i+1) % (size-1))].getValue());
+            
+            
             
         }
         return sound;
     }
     
-    
+   
 } // this } is the end of class Sound, put all new methods before this
