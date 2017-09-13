@@ -223,5 +223,74 @@ public class Sound extends SimpleSound {
             }
         }
     }
+    /**
+     * method to splice two sounds together with some silence between them
+     */
+    public void splice()
+    {
+        Sound sound1=
+                new Sound(FileChooser.getMediaPath("guzdial.wav"));
+        Sound sound2=
+                new Sound(FileChooser.getMediaPath("is.wav"));
+        int targetIndex =0; //starting value
+        int value =0;
+        
+        //copy sound1 to current sound
+        for (int i=0; i< sound1.getLength();i++,targetIndex++)
+        {
+            value=sound1.getSampleValueAt(i);
+            this.setSampleValueAt(targetIndex, value);
+        }    
+            //creat silence between words
+            for (int i=0;i< (int) (this.getSamplingRate()*0.1);i++,targetIndex++);
+            {
+                this.setSampleValueAt(targetIndex, 0);
+            }
+        
+            //copy all of sound2 into current sound target
+            for (int i =0;i<sound2.getLength();i++,targetIndex++)
+            {
+                value = sound2.getSampleValueAt(i);
+                this.setSampleValueAt(targetIndex, value);
+            }
+    }
+    /**
+     * this method copies part of a sound into another sound given a start index
+     * @param source the source sound to copy from
+     * @param sourceStart starting index from the source
+     * @param sourceStop the ending index
+     * @param targetStart index to start copying sound into
+     */
+    public void splice(Sound source,int sourceStart,int sourceStop, int targetStart)
+    {
+        
+        //loop copying source to target
+        for (int sourceIndex = sourceStart,targetIndex=targetStart;
+                sourceIndex<sourceStop && targetIndex<this.getLength();
+                sourceIndex++,targetIndex++)
+        {
+            this.setSampleValueAt(targetIndex, source.getSampleValueAt(sourceIndex));
+        }
+              
+                
+    }
+    /**
+     * method to reverse current sound
+     */
+    public void reverse()
+    {
+        Sound orig = new Sound(this.getFileName());
+        int length = this.getLength();
+        
+        //loop through samples
+        for (int targetIndex =0,sourceIndex = length -1;
+                targetIndex<length && sourceIndex > 0;
+                targetIndex++,sourceIndex--)
+        {
+            this.setSampleValueAt(targetIndex, orig.getSampleValueAt(sourceIndex));
+        }
+    }
+    
+    
     
 } // this } is the end of class Sound, put all new methods before this
